@@ -1,0 +1,65 @@
+﻿waypoint,location,treatment,variable,t1,t2,t3
+BFH08,Bonefish Hole,Control,length,17.95294118,16.36111111,14.90631579
+BFH08,Bonefish Hole,Exclusion,length,19.62857143,18.84615385,18.86625
+BFH10,Bonefish Hole,Control,length,15.25,15.04166667,11.65311765
+BFH10,Bonefish Hole,Exclusion,length,13.11,14.34,17.47875
+BFH12,Bonefish Hole,Control,length,13.25454545,17.93125,17.81
+BFH12,Bonefish Hole,Exclusion,length,21.78,18.73333333,16.44117647
+BFH13,Bonefish Hole,Control,length,14.03809524,16.61428571,15.83529412
+BFH13,Bonefish Hole,Exclusion,length,23.22857143,20.19090909,16.05
+SBIM04 ,South Flats,Control,length,16.31764706,13.09285714,18.459375
+SBIM04 ,South Flats,Exclusion,length,18.0125,10.67333333,15.60666667
+SBIM09,South Flats,Control,length,12.65789474,12.76666667,14.5285625
+SBIM09,South Flats,Exclusion,length,11.57222222,13.27142857,15.07333333
+SBIM11,South Flats,Control,length,16.90666667,24.22142857,19.97533333
+SBIM11,South Flats,Exclusion,length,19.65384615,11.6525,13.60305882
+SBIM12,South Flats,Control,length,16,17.41875,14.08666667
+SBIM12,South Flats,Exclusion,length,20.80833333,14.90666667,19.795625
+BFH08,Bonefish Hole,Control,width,0.774941176,0.853277778,0.951052632
+BFH08,Bonefish Hole,Exclusion,width,0.900642857,0.832692308,0.84825
+BFH10,Bonefish Hole,Control,width,0.787642857,0.765416667,0.843529412
+BFH10,Bonefish Hole,Exclusion,width,0.8179,0.7846,0.8825
+BFH12,Bonefish Hole,Control,width,0.931181818,0.9065,1.001578947
+BFH12,Bonefish Hole,Exclusion,width,1.0192,1.020066667,0.995764706
+BFH13,Bonefish Hole,Control,width,0.804047619,0.798714286,0.897588235
+BFH13,Bonefish Hole,Exclusion,width,0.897571429,0.767636364,0.857857143
+SBIM04 ,South Flats,Control,width,0.740588235,0.700142857,0.8515625
+SBIM04 ,South Flats,Exclusion,width,0.7099375,0.635166667,0.819666667
+SBIM09,South Flats,Control,width,0.633894737,0.6392,0.6775
+SBIM09,South Flats,Exclusion,width,0.649166667,0.622928571,0.806666667
+SBIM11,South Flats,Control,width,0.754466667,0.836071429,0.8756
+SBIM11,South Flats,Exclusion,width,0.695769231,0.627375,0.837647059
+SBIM12,South Flats,Control,width,0.735714286,0.8353125,0.750333333
+SBIM12,South Flats,Exclusion,width,0.8475,0.705466667,0.9013125
+BFH08,Bonefish Hole,Control,ssweight,269.06,287.02,691.02
+BFH08,Bonefish Hole,Exclusion,ssweight,280.6,223.8,591.5
+BFH10,Bonefish Hole,Control,ssweight,204.62,284.9866667,395.4
+BFH10,Bonefish Hole,Exclusion,ssweight,142.36,187.54,322.46
+BFH12,Bonefish Hole,Control,ssweight,196.62,317.84,691.12
+BFH12,Bonefish Hole,Exclusion,ssweight,344.62,352.6,857.24
+BFH13,Bonefish Hole,Control,ssweight,317.08,250.1,667.06
+BFH13,Bonefish Hole,Exclusion,ssweight,396.86,210.36,570.74
+SBIM04 ,South Flats,Control,ssweight,237.52,160.92,286.66
+SBIM04 ,South Flats,Exclusion,ssweight,282.88,103.22,388.22
+SBIM09,South Flats,Control,ssweight,213.52,161.04,228.82
+SBIM09,South Flats,Exclusion,ssweight,174.12,134.26,315.64
+SBIM11,South Flats,Control,ssweight,286.24,390.42,516.7
+SBIM11,South Flats,Exclusion,ssweight,194.66,122.74,367.7
+SBIM12,South Flats,Control,ssweight,230.3,288.26,352.12
+SBIM12,South Flats,Exclusion,ssweight,311.58,159.26,475.42
+BFH08,Bonefish Hole,Control,ssdensity,176,156.8,163.2
+BFH08,Bonefish Hole,Exclusion,ssdensity,208,192,179.2
+BFH10,Bonefish Hole,Control,ssdensity,160,145.6,192
+BFH10,Bonefish Hole,Exclusion,ssdensity,192,142.4,134.4
+BFH12,Bonefish Hole,Control,ssdensity,128,120,174.4
+BFH12,Bonefish Hole,Exclusion,ssdensity,128,145.6,166.4
+BFH13,Bonefish Hole,Control,ssdensity,224,184,174.4
+BFH13,Bonefish Hole,Exclusion,ssdensity,224,142.4,112
+SBIM04 ,South Flats,Control,ssdensity,448,524.8,427.2
+SBIM04 ,South Flats,Exclusion,ssdensity,576,470.4,427.2
+SBIM09,South Flats,Control,ssdensity,432,209.6,472
+SBIM09,South Flats,Exclusion,ssdensity,464,396.8,396.8
+SBIM11,South Flats,Control,ssdensity,464,489.6,606.4
+SBIM11,South Flats,Exclusion,ssdensity,272,457.6,569.6
+SBIM12,South Flats,Control,ssdensity,336,208,289.6
+SBIM12,South Flats,Exclusion,ssdensity,304,155.2,227.2

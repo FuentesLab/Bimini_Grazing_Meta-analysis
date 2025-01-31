@@ -1,1 +1,1 @@
-Scripts and dataset associated with Putillo et al. "Effects of green turtle herbivory on seagrass ecosystems: An experimental test in the context of a global meta-analysis", submitted to Ecology journal. 
+Scripts and dataset associated with Putillo et al. "Effects of green turtle herbivory on seagrass ecosystems: An experimental test in the context of a global meta-analysis", submitted to Marine Ecology Progress Series journal. 

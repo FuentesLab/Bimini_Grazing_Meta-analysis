@@ -1,126 +1,126 @@
-#This script creates Figure 4
+#This script creates Figure 3
 
+# Required libraries
 library(tidyverse)
 library(ggplot2)
-library(dplyr)
 library(cowplot)
-library(viridis)
+library(dplyr)
 
+# Load data
 
+data <- read.csv("biminigrazing_plot_summary.csv", header = TRUE)
 
+# Pivot the data to a long format for easier manipulation
+data_long <- data %>%
+  pivot_longer(
+    cols = c(t1, t2, t3),       # Specify only the time-point columns
+    names_to = "time",          # New column for time (e.g., t1, t2, t3)
+    values_to = "value"         # New column for values (numeric data)
+  )
 
-data <- tribble(
-  ~Location, ~Parameter, ~Treatment, ~Time, ~Mean, ~SD,
-  "Bonefish Hole", "Blade length (cm)", "Grazed", "July", 15.23, 7.23,
-  "Bonefish Hole", "Blade length (cm)", "Grazed", "August", 16.58, 7.81,
-  "Bonefish Hole", "Blade length (cm)", "Grazed", "October", 15.12, 7.51,
-  "Bonefish Hole", "Blade length (cm)", "Exclusion", "July", 19.77, 8.32,
-  "Bonefish Hole", "Blade length (cm)", "Exclusion", "August", 17.84, 7.75,
-  "Bonefish Hole", "Blade length (cm)", "Exclusion", "October", 17.23, 7.40,
-  "Bonefish Hole", "Blade width (cm)", "Grazed", "July", 0.81, 0.13,
-  "Bonefish Hole", "Blade width (cm)", "Grazed", "August", 0.84, 0.17,
-  "Bonefish Hole", "Blade width (cm)", "Grazed", "October", 0.93, 0.10,
-  "Bonefish Hole", "Blade width (cm)", "Exclusion", "July", 0.91, 0.13,
-  "Bonefish Hole", "Blade width (cm)", "Exclusion", "August", 0.86, 0.19,
-  "Bonefish Hole", "Blade width (cm)", "Exclusion", "October", 0.90, 0.11,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Grazed", "July", 172.0, 35.08,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Grazed", "August", 151.60, 41.63,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Grazed", "October", 176.00, 43.48,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Exclusion", "July", 188.0, 36.91,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Exclusion", "August", 155.6, 45.11,
-  "Bonefish Hole", "Shoot density (shoots m-2)", "Exclusion", "October", 148.0, 54.92,
-  "Bonefish Hole", "Shoot weight (mg)", "Grazed", "July", 246.85, 93.16,
-  "Bonefish Hole", "Shoot weight (mg)", "Grazed", "August", 284.99, 135.07,
-  "Bonefish Hole", "Shoot weight (mg)", "Grazed", "October", 611.15, 283.32,
-  "Bonefish Hole", "Shoot weight (mg)", "Exclusion", "July", 291.11, 176.27,
-  "Bonefish Hole", "Shoot weight (mg)", "Exclusion", "August", 243.58, 110.44,
-  "Bonefish Hole", "Shoot weight (mg)", "Exclusion", "October", 585.49, 246.44,
-  "South Flats", "Blade length (cm)", "Grazed", "July", 15.32, 5.92,
-  "South Flats", "Blade length (cm)", "Grazed", "August", 16.82, 8.14,
-  "South Flats", "Blade length (cm)", "Grazed", "October", 16.75, 8.40,
-  "South Flats", "Blade length (cm)", "Exclusion", "July", 16.98, 7.76,
-  "South Flats", "Blade length (cm)", "Exclusion", "August", 12.70, 6.10,
-  "South Flats", "Blade length (cm)", "Exclusion", "October", 15.96, 7.65,
-  "South Flats", "Blade width (cm)", "Grazed", "July", 0.71, 0.10,
-  "South Flats", "Blade width (cm)", "Grazed", "August", 0.75, 0.12,
-  "South Flats", "Blade width (cm)", "Grazed", "October", 0.79, 0.10,
-  "South Flats", "Blade width (cm)", "Exclusion", "July", 0.72, 0.11,
-  "South Flats", "Blade width (cm)", "Exclusion", "August", 0.65, 0.07,
-  "South Flats", "Blade width (cm)", "Exclusion", "October", 0.84, 0.08,
-  "South Flats", "Shoot density (shoots m-2)", "Grazed", "July", 420.0, 50.43,
-  "South Flats", "Shoot density (shoots m-2)", "Grazed", "August", 358.0, 178.38,
-  "South Flats", "Shoot density (shoots m-2)", "Grazed", "October", 448.8, 176.54,
-  "South Flats", "Shoot density (shoots m-2)", "Exclusion", "July", 404.0, 124.66,
-  "South Flats", "Shoot density (shoots m-2)", "Exclusion", "August", 370.0, 168.48,
-  "South Flats", "Shoot density (shoots m-2)", "Exclusion", "October", 431.60, 196.38,
-  "South Flats", "Shoot weight (mg)", "Grazed", "July", 241.90, 115.97,
-  "South Flats", "Shoot weight (mg)", "Grazed", "August", 250.16, 146.65,
-  "South Flats", "Shoot weight (mg)", "Grazed", "October", 371.47, 200.58,
-  "South Flats", "Shoot weight (mg)", "Exclusion", "July", 240.81, 113.07,
-  "South Flats", "Shoot weight (mg)", "Exclusion", "August", 129.87, 48.48,
-  "South Flats", "Shoot weight (mg)", "Exclusion", "October", 361.36, 120.39
+# Calculate treatment - control differences
+# Group by variable, location, time, and treatment
+diff_summary <- data_long %>%
+  pivot_wider(names_from = treatment, values_from = value) %>%  # Separate Control and Exclusion
+  mutate(difference = Exclusion - Control) %>%                 # Calculate the difference
+  group_by(variable, location, time) %>%                       # Group by variable, site, and time
+  summarise(
+    mean_diff = mean(difference, na.rm = TRUE),                # Mean of differences
+    sd_diff = sd(difference, na.rm = TRUE),                    # SD of differences
+    n = n()                                                    # Number of observations
+  )
+
+print(diff_summary, n=24)
+
+write.csv(diff_summary, "diff_summary_table.csv", row.names = FALSE)
+
+y_axis_labels <- c(
+  "length" = "Length difference (cm)",
+  "width" = "Width difference (cm)",
+  "ssdensity" = "Ss Density Difference (shoots/m²)",
+  "ssweight" = "Ss Weight Difference (mg)"
 )
 
-
-
-# Ensure the Time variable is a factor with specified levels
-data <- data %>%
-  mutate(Time = factor(Time, levels = c("July", "August", "October")))
-
-y_scales <- list(
-  "Blade length (cm)" = c(0, 30),
-  "Blade width (cm)" = c(0, 1.25),
-  "Shoot density (shoots m-2)" = c(0, 650),
-  "Shoot weight (mg)" = c(0, 900)
-)
-
-create_plot <- function(data, parameter, location) {
-  # Get the y-axis scale for the current parameter
-  y_scale <- y_scales[[parameter]]
-  parameter_label <- gsub("(.*)\\((.*)\\)", "\\1\n(\\2)", parameter)
-  
-  
-  ggplot(data %>% filter(Parameter == parameter, Location == location), aes(x = factor(Treatment, levels = c("Grazed", "Exclusion")), y = Mean, fill = Time)) +
-    geom_bar(stat = "identity", position = position_dodge(width = 0.7), color = "black", width = 0.7, size = 0.2) +
-    geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0.2, position = position_dodge(width = 0.7), size = 0.2) +
-    scale_fill_viridis_d() +
-    labs(title = NULL, x = NULL, y = parameter_label) +
-    theme(
-      plot.background = element_rect(fill = ifelse(data$Treatment == "Grazed", "white", "lightgrey")),
-      panel.background = element_rect(fill = "white"),
-      axis.line.x = element_line(color = "black", size = 0.2),
-      axis.line.y = element_line(color = "black", size = 0.2),
-      axis.ticks.y = element_line(size = 0.2),
-      axis.text.x = element_blank(),  # Remove x-axis text
-      axis.ticks.x = element_blank(),
-      text = element_text(size = 8, family = "sans", color = "black"),
-      axis.text = element_text(size = 8, family = "sans", color = "black"),
-      axis.title.y = element_text(size = 8, family = "sans", color = "black", margin = margin(r = 8)),
-    ) +
-    guides(fill = FALSE) +
-    scale_y_continuous(expand = c(0, 0), limits = y_scale) +
-    scale_x_discrete(expand = c(0, 0))
-}
-
-parameters <- unique(data$Parameter)
-locations <- unique(data$Location)
-
+# Create individual plots and store them in a list
 plots <- list()
+response_vars <- unique(diff_summary$variable)
 
-# Fill the plots list with individual plot objects
-for (param in parameters) {
-  for (loc in locations) {
-    plots[[paste(param, loc, sep = "_")]] <- create_plot(data, parameter = param, location = loc)
-  }
+for (resp in response_vars) {
+  plot_data <- diff_summary %>% filter(variable == resp)
+  
+  p <- ggplot(plot_data, aes(x = location, y = mean_diff, shape = time)) +
+    geom_point(size = 3, position = position_dodge(width = 0.4), color = "black") +
+    geom_errorbar(aes(ymin = mean_diff - sd_diff, ymax = mean_diff + sd_diff),
+                  width = 0.2, position = position_dodge(width = 0.4), color = "black") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "darkgray", linewidth = 0.7) +
+    scale_shape_manual(values = c(16, 17, 18),
+                       labels = c("t1", "t2", "t3")) +
+    labs(
+      y = y_axis_labels[[resp]],
+      x = "Location",
+      shape = "Sampling Time"
+    ) +
+    theme_minimal() +
+    theme(
+      panel.grid = element_blank(),
+      axis.line = element_line(),
+      text = element_text(size = 14),
+      strip.text = element_text(size = 14, face = "bold"),
+      legend.position = "right", # Place legend to the right
+      legend.box = "vertical", # Arrange legend vertically
+      legend.background = element_rect(color = "black", linewidth = 0.5), # Box around legend
+      legend.title = element_blank(),
+      axis.text.x = element_text(angle = 0, hjust = 0.5, size = 12),
+      axis.text.y = element_text(size = 12)
+    )
+  
+  # Store plot in the list
+  plots[[resp]] <- p
 }
 
-# Plot grid
-plot_grid_object <- plot_grid(plotlist = plots, nrow = length(parameters), ncol = length(locations))
+# Combine individual plots into a 2x2 grid
+final_plot <- plot_grid(
+  plots[["length"]] + ggtitle("a") + theme(legend.position = "none"),
+  plots[["width"]] + ggtitle("b") + theme(legend.position = "none"),
+  plots[["ssdensity"]] + ggtitle("c") + theme(legend.position = "none"),
+  plots[["ssweight"]] + ggtitle("d") + theme(legend.position = "none"),
+  ncol = 2, align = "hv"
+)
 
+# Extract the shared legend
+shared_legend <- get_legend(plots[["length"]])
 
-ggsave("/Users/AlexaPutillo/Library/CloudStorage/OneDrive-FloridaStateUniversity/PhD/Projects/Bimini Grazing/Drafts/Submission documents 8.13.24/Figure 3.pdf", width = 12, height = 12, units = "cm")
+# Combine the plots and the shared legend
+final_plot_with_legend <- plot_grid(
+  final_plot,
+  shared_legend,
+  ncol = 2,
+  rel_widths = c(4, 1) # Adjust relative widths of plots and legend
+)
 
-###if want to add labels: geom_text(aes(label = round(Mean, 2)), vjust = -0.5, position = position_dodge(width = 0.7)) +  # Add values on top of bars
+# Save the final plot as PDF and JPEG
+ggsave(
+  filename = "final_plot_with_legend.pdf",
+  plot = final_plot_with_legend,
+  device = "pdf",
+  width = 10,
+  height = 8,
+  units = "in"
+)
+
+ggsave(
+  filename = "final_plot_with_legend.jpeg",
+  plot = final_plot_with_legend,
+  device = "jpeg",
+  dpi = 300,
+  width = 10,
+  height = 8,
+  units = "in"
+)
+
+# Display the final plot
+print(final_plot_with_legend)
+
 
 
 

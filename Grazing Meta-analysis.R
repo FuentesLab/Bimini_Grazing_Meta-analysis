@@ -16,7 +16,7 @@ library(ggpubr)
 #####----Data prep--------------------------------------------------------------
 
 # Read in data
-turtles_raw <- read_excel("C:/Users/jslef/OneDrive/Documents/Manuscripts/Sea Turtle Meta-Analysis/Data/Metadata_Bimini_Grazing_Reformatted Final.xlsx", sheet = 1)
+turtles_raw <- read_excel("Metadata_Grazing_Meta-analysis.xlsx", sheet = 1)
 
 
 ######----Format data-----------------------------------------------------------
